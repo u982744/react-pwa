@@ -4,6 +4,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --config webpack.config.prod.js",
+    "deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
     "test": "jest"
   },
   "repository": {
