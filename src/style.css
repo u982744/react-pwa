@@ -9,3 +9,24 @@
   justify-content: center;
   align-items: center;
 }
+
+.mdl-layout__content > div {
+  margin: 0 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(100% - 40px);
+}
+
+.addBar {
+  padding: 0 8px 0 16px;
+}
+
+.mdl-button--fab.mdl-button--mini-fab {
+  float: right;
+}
+
+.mdl-textfield {
+  width: calc(100% - 60px);
+}

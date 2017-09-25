@@ -99,14 +99,15 @@ export default class ItemPage extends React.Component {
     return(
       <div>
         <h1>{ listName }</h1>
-        <Textfield
-          onChange={(event) => { newText = event.target.value }}
-          label="Add new item..."
-          style={{width: '200px'}}
-        />
-        <FABButton mini onClick={() => { this.add(newText, listId) }}>
-          <Icon name="add" />
-        </FABButton>
+        <div className="addBar">
+          <Textfield
+            onChange={(event) => { newText = event.target.value }}
+            label="Add new item..."
+          />
+          <FABButton mini onClick={() => { this.add(newText, listId) }}>
+            <Icon name="add" />
+          </FABButton>
+        </div>
         <List>
           {items}
         </List>
