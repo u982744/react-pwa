@@ -19,7 +19,7 @@ function login() {
       Config.token = data._id;
       Config.userEmail = data.local.email;
       Config.userId = data._id;
-      window.location.href = "/#/list";
+      window.location.href = "#/list";
     })
 }
 
