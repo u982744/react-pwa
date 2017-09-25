@@ -3,8 +3,16 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 import { Layout, Header, Drawer, Navigation, Content } from 'react-mdl';
 
-import About from './components/About';
-import Home from './components/Home';
+import Login from './components/Login';
+import List from './components/List';
+import Item from './components/Item';
+
+const routes = [
+  { 
+    path: '/list/:id/items',
+    component: Item
+  }
+]
 
 const RouteHideDrawer = ({ component: Component, ...rest }) => (
   <Route {...rest} render={() => {
@@ -18,18 +26,20 @@ const RouteHideDrawer = ({ component: Component, ...rest }) => (
 
 export default () => (
   <Router>
-    <Layout fixedHeader>
-      <Header title="PWA"/>
-      <Drawer title="PWA">
-        <Navigation>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </Navigation>
-      </Drawer>
-      <Content>
-        <RouteHideDrawer exact path="/" component={ Home } />
-        <RouteHideDrawer path="/about" component={ About } />
-      </Content>
-    </Layout>
+    <div>
+      <Layout fixedHeader>
+        <Header title="Lists"/>
+        <Drawer title="Menu">
+          <Navigation>
+            <Link to="/">Login</Link>
+          </Navigation>
+        </Drawer>
+        <Content>
+          <RouteHideDrawer exact path="/" component={ Login } />
+          <RouteHideDrawer exact path="/list" component={ List } />
+          <Route path="/list/:listId/items" component={Item}/>
+        </Content>
+      </Layout>
+    </div>
   </Router>
 );
