@@ -7,12 +7,8 @@ import Login from './components/Login';
 import List from './components/List';
 import Item from './components/Item';
 
-const routes = [
-  { 
-    path: '/list/:id/items',
-    component: Item
-  }
-]
+// const baseFolder = "/react-pwa";
+const baseFolder = "";
 
 const RouteHideDrawer = ({ component: Component, ...rest }) => (
   <Route {...rest} render={() => {
@@ -35,9 +31,9 @@ export default () => (
           </Navigation>
         </Drawer>
         <Content>
-          <RouteHideDrawer exact path="/" component={ Login } />
-          <RouteHideDrawer exact path="/list" component={ List } />
-          <Route path="/list/:listId/items" component={Item}/>
+          <RouteHideDrawer exact path={baseFolder + "/"} component={ Login } />
+          <RouteHideDrawer exact path={baseFolder + "/list"} component={ List } />
+          <Route path={baseFolder + "/list/:listId/items"} component={Item}/>
         </Content>
       </Layout>
     </div>
