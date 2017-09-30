@@ -3,7 +3,7 @@ import { Textfield, Button } from 'react-mdl';
 import { Config } from "../config";
 
 const email = "berman.tim@gmail.com";
-const password = "Shiznit!";
+const password = "";
 
 function login() {
   let headers = new Headers();
