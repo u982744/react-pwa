@@ -3,7 +3,7 @@ import { Textfield, Button } from 'react-mdl';
 import { Config } from "../config";
 
 const email = "berman.tim@gmail.com";
-const password = "";
+let password = "";
 
 function login() {
   let headers = new Headers();
@@ -36,10 +36,9 @@ export default () => (
     </div>
     <div>
       <Textfield
-        onChange={() => {}}
+        onChange={(e) => {password = e.target.value}}
         label="Password"
         style={{width: '200px'}}
-        value={ password }
         password
       />
     </div>
