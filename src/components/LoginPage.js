@@ -1,15 +1,16 @@
 import React from 'react';
 import localforage from "localforage";
-import { Textfield, Button } from 'react-mdl';
+import { Textfield, Button, Spinner } from 'react-mdl';
 import { Config } from "../config";
 
 export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      loaded: false
+      email: "berman.tim@gmail.com",
+      password: "Shiznit!",
+      isLoaded: false,
+      isRegistering: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,6 +23,8 @@ export default class LoginPage extends React.Component {
       .then((value) => {
           if (value) {
             window.location.href = "#/list";
+          } else {
+            this.setState({isLoaded: true});
           }
       })
       .catch((err) => {
@@ -82,15 +85,42 @@ export default class LoginPage extends React.Component {
       });
   }
 
+  register() {
+    let that = this;
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    let fetchData = {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: headers
+    }
+
+    fetch(Config.apiUrl + "signup", fetchData)
+      .then(() => {
+        alert("Your account was successfully created.");
+        this.setState({isLoaded: true, isRegistering: false});
+      })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.login();
+    this.setState({isLoaded: false});
+
+    if (this.state.isRegistering) {
+      this.register();
+    } else {
+      this.login();
+    }
   }
 
   render() {
-    return (
+    let content;
+
+    if (this.state.isLoaded) {
+      content = (
         <div>
-          <h3>Login</h3>
+          <h3>{ this.state.isRegistering ? "Register" : "Login" }</h3>
           <form onSubmit={this.handleSubmit}>
             <div>
               <Textfield
@@ -112,10 +142,24 @@ export default class LoginPage extends React.Component {
               />
             </div>
             <div>
-              <Button type="submit" raised colored>Sign in</Button>
+              <Button type="submit" raised colored>{ this.state.isRegistering ? "Sign up" : "Sign in" }</Button>
             </div>
           </form>
+          <div>
+            <p>&nbsp;</p>
+            <p>Need an account? <a onClick={ () => {this.setState({isRegistering: true})} }>Sign up</a></p>
+            <p><a onClick={ () => {this.setState({isRegistering: false})} }>Back to login</a></p>
+          </div>
         </div>
-    )
+      );
+    } else {
+      content = <Spinner singleColor />;
+    }
+
+    return (
+      <div>
+        { content }
+      </div>
+    );
   }
 }
