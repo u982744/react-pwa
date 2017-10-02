@@ -90,7 +90,7 @@ export default class LoginPage extends React.Component {
   render() {
     return (
         <div>
-          <h1>Login</h1>
+          <h3>Login</h3>
           <form onSubmit={this.handleSubmit}>
             <div>
               <Textfield
