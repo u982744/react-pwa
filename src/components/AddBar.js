@@ -10,10 +10,18 @@ export default class AddBar extends React.Component {
       hint: props.hint || "Add..."
     };
 
-    this.add = this.add.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  add() {
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({name: value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
     if (this.state.name !== "") {
       this.props.onAdd(this.state.name);
       this.setState({name: ""});
@@ -23,14 +31,16 @@ export default class AddBar extends React.Component {
   render() {
     return(
       <div className="addBar">
-        <Textfield
-          onChange={(event) => { this.setState({name: event.target.value}) }}
-          label={ this.state.hint }
-          value={ this.state.name }
-        />
-        <FABButton mini onClick={ this.add }>
-          <Icon name="add" />
-        </FABButton>
+        <form onSubmit={ this.handleSubmit }>
+          <Textfield
+            onChange={ this.handleInputChange }
+            label={ this.state.hint }
+            value={ this.state.name }
+          />
+          <FABButton type="submit" mini >
+            <Icon name="add" />
+          </FABButton>
+        </form>
       </div>
     );
   }
