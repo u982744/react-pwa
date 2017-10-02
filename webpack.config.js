@@ -9,7 +9,8 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './src/vendor',
-    './src/index'
+    './src/index',
+    './src/config'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -31,6 +32,7 @@ module.exports = {
     {
       test: /\.css/,
       loaders: ["style-loader", "css-loader"]
-    }]
+    }],
+    noParse: [new RegExp('node_modules/localforage/dist/localforage.js')]
   }
 };
