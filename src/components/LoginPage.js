@@ -13,6 +13,7 @@ export default class LoginPage extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -81,32 +82,39 @@ export default class LoginPage extends React.Component {
       });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.login();
+  }
+
   render() {
     return (
         <div>
           <h1>Login</h1>
-          <div>
-            <Textfield
-              name="email"
-              onChange={ this.handleInputChange }
-              label="Email"
-              style={{width: '200px'}}
-              defaultValue={ this.state.email }
-            />
-          </div>
-          <div>
-            <Textfield
-              name="password"
-              onChange={ this.handleInputChange }
-              label="Password"
-              style={{width: '200px'}}
-              defaultValue={ this.state.password }
-              password
-            />
-          </div>
-          <div>
-            <Button raised colored onClick={ (e) => {this.login(e)} }>Sign in</Button>
-          </div>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <Textfield
+                name="email"
+                onChange={ this.handleInputChange }
+                label="Email"
+                style={{width: '200px'}}
+                defaultValue={ this.state.email }
+              />
+            </div>
+            <div>
+              <Textfield
+                name="password"
+                onChange={ this.handleInputChange }
+                label="Password"
+                style={{width: '200px'}}
+                defaultValue={ this.state.password }
+                password
+              />
+            </div>
+            <div>
+              <Button type="submit" raised colored>Sign in</Button>
+            </div>
+          </form>
         </div>
     )
   }
